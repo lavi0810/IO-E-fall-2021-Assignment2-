@@ -1,0 +1,133 @@
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+    <script src="../lib/p5.speech.js"></script>
+    <script>
+        var myVoice = new p5.Speech();
+        var myVoice2 = new p5.Speech('zh-CN'); // new P5.Speech object
+
+        //myVoice.onLoad = speechLoaded; // could do it this way
+        myVoice.onStart = speechStarted;
+//        myVoice.onPause = speechPaused; // not working
+//        myVoice.onResume = speechResumed; // not working
+        myVoice.onEnd = speechEnded;
+
+        myVoice2.onStart = speechStarted2;
+//        myVoice2.onPause = speechPaused; // not working
+//        myVoice2.onResume = speechResumed; // not working
+        myVoice2.onEnd = speechEnded2;
+
+        var lyric = "all the clouds that loured upon our house.  in the deep bosom of the ocean buried.";
+        var lyric2 = "笼罩在我们房子上的所有云彩。深埋在海洋的怀抱里。";
+        var speakbutton; // UI
+        var speakbutton2; // UI
+
+        function setup() {
+            createCanvas(400, 800);
+
+            // button:
+           
+
+            speakbutton2 = createButton('Mandrain');
+            speakbutton2.position(180, 600);
+            speakbutton2.mousePressed(buttonClicked2);
+ speakbutton = createButton('English');
+            speakbutton.position(180, 200);
+            speakbutton.mousePressed(buttonClicked);
+
+        }
+
+        function draw() {
+            // why draw when you can click?
+        }
+
+        function buttonClicked() {
+            if (speakbutton.elt.innerHTML == 'English') myVoice.speak(lyric);
+
+            else if (speakbutton.elt.innerHTML == 'Stop') myVoice.stop();
+            else if (speakbutton2.elt.innerHTML == 'Stop2') myVoice2.stop();
+
+
+        }
+
+        function buttonClicked2() {
+
+
+            if (speakbutton2.elt.innerHTML == 'Mandrain') myVoice2.speak(lyric2);
+//            else if (speakbutton2.elt.innerHTML == 'Pause2') myVoice2.pause(); // not working
+//            else if (speakbutton2.elt.innerHTML == 'Resume2') myVoice2.resume(); // not working
+            else if (speakbutton2.elt.innerHTML == 'Stop2') myVoice2.stop();
+            else if (speakbutton.elt.innerHTML == 'Stop') myVoice.stop();
+        }
+
+        function speechLoaded() {
+            // say cheers:
+            background(0, 255, 0);
+
+            myVoice.speak("testing one two three!!!");
+        }
+
+        function speechLoaded2() {
+            // say cheers:
+                        background(0, 255, 0);
+
+            myVoice2.speak("测试 1 2 3！！");
+        }
+
+        function speechStarted() {
+            background(0, 255, 0);
+            speakbutton.elt.innerHTML = 'Stop';
+            speakbutton2.elt.innerHTML = 'Stop2';
+        }
+
+        function speechStarted2() {
+            background(0, 255, 0);
+            speakbutton.elt.innerHTML = 'Stop';
+            speakbutton2.elt.innerHTML = 'Stop2';
+        }
+
+        //        function speechStarted2() {
+        ////            position(180,600);
+        //            background(0, 255, 255);
+        //            speakbutton2.elt.innerHTML = 'Stop2';
+        //        }
+        // not working...
+//        function speechPaused() {
+//            background(0, 255, 0);
+//            speakbutton.elt.innerHTML = 'Resume';
+//        }
+//
+//        //        function speechPaused2() {
+//        //            background(0, 255, 0);
+//        //            speakbutton2.elt.innerHTML = 'Resume2';
+//        //        }
+//
+//        // not working...
+//        function speechResumed() {
+//            background(0, 255, 0);
+//            speakbutton.elt.innerHTML = 'Pause';
+//        }
+
+        //        function speechResumed2() {
+        //            background(0, 255, 0);
+        //            speakbutton2.elt.innerHTML = 'Pause2';
+        //        }
+
+        function speechEnded() {
+            background(255, 0, 0);
+            speakbutton.elt.innerHTML = 'English';
+            speakbutton2.elt.innerHTML = 'Mandrain';
+
+        }
+
+        function speechEnded2() {
+            background(255, 0, 0);
+            speakbutton.elt.innerHTML = 'English';
+            speakbutton2.elt.innerHTML = 'Mandrain';
+        }
+    </script>
+</head>
+
+<body>
+</body></html>
